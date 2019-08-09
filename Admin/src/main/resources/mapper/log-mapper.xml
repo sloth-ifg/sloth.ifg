@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.safetyBread.admin.DAO.LogDAO">
+	<select id="totalLogs" resultType="com.safetyBread.admin.model.Log" parameterType="Map">
+		select id, skill, user, msg, date from log
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="id != null and !id.equals('')">
+				id = #{id}
+			</if>
+			<if test="skill != null and !skill.equals('')">
+				AND skill like CONCAT("%", #{skill}, "%")
+			</if>
+			<if test="user != null and !user.equals('')">
+				AND user like CONCAT("%", #{user}, "%")
+			</if>
+			<if test="msg != null and !msg.equals('')">
+				AND msg like CONCAT("%", #{msg}, "%")
+			</if>
+			<if test="date != null and !date.equals('')">
+				AND date like CONCAT("%", #{date}, "%")
+			</if>
+		</trim>
+	</select>
+
+	<select id="getLogs"
+		resultType="com.safetyBread.admin.model.Log" parameterType="Map">
+		select id, skill, user, msg, date from log
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="id != null and !id.equals('')">
+				id = #{id}
+			</if>
+			<if test="skill != null and !skill.equals('')">
+				AND skill like CONCAT("%", #{skill}, "%")
+			</if>
+			<if test="user != null and !user.equals('')">
+				AND user like CONCAT("%", #{user}, "%")
+			</if>
+			<if test="msg != null and !msg.equals('')">
+				AND msg like CONCAT("%", #{msg}, "%")
+			</if>
+			<if test="date != null and !date.equals('')">
+				AND date like CONCAT("%", #{date}, "%")
+			</if>
+		</trim>
+		order by id desc limit #{index}, 15;
+	</select>
+
+	<select id="getTotalCount" resultType="Map"
+		parameterType="Map">
+		select count(*) as 'total' from log 
+		<trim prefix="where" prefixOverrides="AND | OR">
+			<if test="id != null and !id.equals('')">
+				id = #{id}
+			</if>
+			<if test="skill != null and !skill.equals('')">
+				AND skill like CONCAT("%", #{skill}, "%")
+			</if>
+			<if test="user != null and !user.equals('')">
+				AND user like CONCAT("%", #{user}, "%")
+			</if>
+			<if test="msg != null and !msg.equals('')">
+				AND msg like CONCAT("%", #{msg}, "%")
+			</if>
+			<if test="date != null and !date.equals('')">
+				AND date like CONCAT("%", #{date}, "%")
+			</if>
+		</trim>
+	</select>
+
+	<insert id="insertLog" parameterType="Map">
+		insert into log(skill, user, msg, date) values(#{skill}, #{user}, #{msg}, #{date});
+	</insert>
+</mapper>
