@@ -1,4 +1,4 @@
-MDB의 Admin-Dashboard-Template-Angular-Bootstrap-master 템플릿을 이용한 Admin page 개발.
+MIT License를 이용하고 있는 MDB Free 버전의 Admin-Dashboard-Template-Angular-Bootstrap-master 템플릿을 이용한 Admin page 개발.
 
 가상의 프로그램을 가정하여 해당 프로그램의 로그를 볼 수 있는 로그 페이지와 관리자 추가/수정/삭제 기능을 구현한 관리자 페이지,
 
