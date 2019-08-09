@@ -1,0 +1,18 @@
+<app-navigation (menu)="sizing($event)"></app-navigation>
+
+<main class="m-3" [ngStyle]="{'padding-left': menu ? '100px' : '270px'}">
+  <div class="mb-4" style="background-color: #36404a">
+    <div class="clearfix">
+      <div class="page-title float-left">{{currentUrl}}</div>
+      <div class="float-right">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Template</li>
+          <li class="breadcrumb-item active">{{currentUrl}}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</main>
+
+<app-footer></app-footer>

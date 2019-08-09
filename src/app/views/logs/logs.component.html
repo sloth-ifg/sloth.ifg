@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-md-12">
+        <!--Card-->
+        <div class="card card-cascade narrower">
+            <!--Card image-->
+            <div class="view gradient-card-header">
+                <div class="md-form mx-3">
+                    <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+                    <input type="text" id="user" class="form-control" mdbInput [(ngModel)]="inputLog.user">
+                    <label for="user">User</label>
+                </div>
+                <div class="md-form mx-3">
+                    <mdb-icon fas icon="yin-yang" class="prefix"></mdb-icon>
+                    <input type="text" id="skill" class="form-control" mdbInput [(ngModel)]="inputLog.skill">
+                    <label for="skill">Skill Name</label>
+                </div>
+                <div class="md-form mx-3">
+                    <mdb-icon fas icon="tag" class="prefix"></mdb-icon>
+                    <input type="text" id="id" class="form-control" mdbInput [(ngModel)]="inputLog.id">
+                    <label for="id">Log ID</label>
+                </div>
+                <div class="md-form mx-3">
+                    <mdb-icon fas icon="comments" class="prefix"></mdb-icon>
+                    <input type="text" id="msg" class="form-control" mdbInput [(ngModel)]="inputLog.msg">
+                    <label for="msg">Message</label>
+                </div>
+                <div class="md-form mx-3">
+                    <mdb-icon fas icon="calendar-check" class="prefix"></mdb-icon>
+                    <input type="text" id="date" class="form-control" mdbInput [(ngModel)]="inputLog.date">
+                    <label for="date">Date</label>
+                </div>
+                <button class="btn btn-dark" (click)="search()">
+                    <mdb-icon fas icon="search" class="mr-2"></mdb-icon>Search
+                </button>
+                <button class="btn btn-dark" (click)="download()">
+                    <mdb-icon fas icon="arrow-down" class="mr-2"></mdb-icon>Download
+                </button>
+            </div>
+            <!--/Card image-->
+            <div class="card-body">
+                <table mdbTable borderless="true" hover="true">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User</th>
+                            <th>Skill Name</th>
+                            <th>Log ID</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of list; let i = index">
+                            <th scope="row">{{(present * pagingService.VIEW_COUNT) + (i + 1) }}</th>
+                            <td>{{ item.user }}</td>
+                            <td>{{ item.skill }}</td>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.msg }}</td>
+                            <td>{{ item.date }}</td>
+                        </tr>
+                        <tr *ngIf="list.length == 0">
+                            <th scope="row text-center" colspan="6">No Logs.</th>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--/.Card content-->
+        </div>
+        <!--/.Card-->
+    </div>
+    <!--Grid column-->
+    <div class="col-md-12">
+        <div class="text-center">
+            <!--Pagination -->
+            <nav class="my-4">
+                <ul class="pagination pagination-circle pg-blue mb-0">
+                    <!--First-->
+                    <li class="page-item">
+                        <a class="page-link" mdbWavesEffect (click)="first()"
+                            [ngClass]="pagingService.isFirst() ? 'd-none' : ''">First</a>
+                    </li>
+                    <!--Arrow left-->
+                    <li class="page-item">
+                        <a class="page-link" mdbWavesEffect aria-label="Previous" (click)="prev()"
+                            [ngClass]="pagingService.isFirst() ? 'd-none' : ''">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <!--Numbers-->
+                    <li class="page-item" *ngFor="let item of pageList" [ngClass]="item == present ? 'active' : ''">
+                        <a class="page-link" mdbWavesEffect (click)="paging(item)">{{ item + 1 }}</a>
+                    </li>
+                    <!--Arrow right-->
+                    <li class="page-item">
+                        <a class="page-link" mdbWavesEffect aria-label="Next" (click)="next()"
+                            [ngClass]="pagingService.isLast(total) ? 'd-none' : ''">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <!--Last-->
+                    <li class="page-item">
+                        <a class="page-link" mdbWavesEffect (click)="last()"
+                            [ngClass]="pagingService.isLast(total) ? 'd-none' : ''">Last</a>
+                    </li>
+
+                    <li class="page-item active" *ngIf="pageList.length == 0">
+                        <a class="page-link" mdbWavesEffect>1</a>
+                    </li>
+                </ul>
+            </nav>
+            <!--/Pagination -->
+        </div>
+    </div>
+    <!--Grid column-->
+</div>

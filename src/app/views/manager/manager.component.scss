@@ -1,0 +1,33 @@
+.blue-gradient {
+  background: -webkit-linear-gradient(50deg, #45cafc, #303f9f);
+  background: linear-gradient(40deg, #45cafc, #4285f4);
+}
+
+.md-form {
+  width: 25% !important;
+  display: inline-block;
+  margin-bottom: 0px;
+}
+
+.md-form .prefix {
+  left: 0px;
+}
+
+.view {
+  text-align: left !important;
+}
+
+.w-15 {
+  width: 15% !important;
+}
+
+.w-10 {
+  width: 10% !important;
+}
+
+select {
+  margin-left: 2.5rem;
+  width: calc(100% - 2.5rem);
+  background-color: #36404a; 
+  color: #fff;
+}

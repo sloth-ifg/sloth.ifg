@@ -1,0 +1,226 @@
+<!--Grid row-->
+<div class="row" *ngIf="!loading">
+
+  <!--Grid column-->
+  <div class="col-md-8 mb-4">
+    <!--Card-->
+    <div class="card">
+      <!--Card content-->
+      <div class="card-body">
+        <h4 class="header-title">주간 사용량</h4>
+        <div style="display: block" *ngIf="week">
+          <canvas mdbChart [chartType]="'bar'" [datasets]="week.datasets" [labels]="week.chartLabels"
+            [colors]="week.chartColors" [options]="week.lineChartOptions" [legend]="false">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <!--/.Card-->
+  </div>
+  <!--Grid column-->
+
+
+  <!--Grid column-->
+  <div class="col-md-4 mb-4">
+    <!--Card-->
+    <div class="card mb-4">
+      <!--Card content-->
+      <div class="card-body">
+        <h4 class="header-title">기능별 사용량 통계</h4>
+        <div style="display: block" *ngIf="doughnutChart">
+          <canvas mdbChart [chartType]="doughnutChart.chartType" [datasets]="doughnutChart.datasets"
+            [labels]="doughnutChart.chartLabels" [colors]="doughnutChart.chartColors"
+            [options]="doughnutChart.doughnutChartOptions" [legend]="false">
+          </canvas>
+        </div>
+        <div id="percent">total<br>
+          <span *ngIf="total else no_total">{{total}}건</span>
+          <ng-template #no_total>0건</ng-template>
+        </div>
+      </div>
+    </div>
+    <!--/.Card-->
+
+    <!--Card Primary-->
+    <div class="card classic-admin-card primary-color mb-4">
+      <div class="card-body">
+        <div class="pull-right">
+          <mdb-icon fas icon="yin-yang"></mdb-icon>
+        </div>
+        <p class="white-text">Skill 1</p>
+        <h4>
+          <strong *ngIf="user">{{user.skill1}}건</strong>
+        </h4>
+      </div>
+    </div>
+    <!--/.Card Primary-->
+
+    <!--Card Red-->
+    <div class="card classic-admin-card red accent-2 mb-4">
+      <div class="card-body">
+        <div class="pull-right">
+          <mdb-icon fas icon="yin-yang"></mdb-icon>
+        </div>
+        <p>Skill 2</p>
+        <h4>
+          <strong *ngIf="user">{{user.skill2}}건</strong>
+        </h4>
+      </div>
+    </div>
+    <!--/.Card Red-->
+
+    <!--Card Waring-->
+    <div class="card classic-admin-card warning-color">
+      <div class="card-body">
+        <div class="pull-right">
+          <mdb-icon fas icon="yin-yang"></mdb-icon>
+        </div>
+        <p class="white-text">Skill 3</p>
+        <h4>
+          <strong *ngIf="user">{{user.skill3}}건</strong>
+        </h4>
+      </div>
+    </div>
+    <!--/.Card Waring-->
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-4 mb-4">
+    <!--Card-->
+    <div class="card">
+      <!--Card content-->
+      <div class="card-body">
+        <h4 class="header-title">Line chart</h4>
+        <div style="display: block" *ngIf="week">
+          <canvas mdbChart [chartType]="week.chartType" [datasets]="week.datasets" [labels]="week.chartLabels"
+            [colors]="week.chartColors" [options]="week.lineChartOptions" [legend]="false">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <!--/.Card-->
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-4 mb-4">
+    <!--Card-->
+    <div class="card">
+      <!--Card content-->
+      <div class="card-body">
+        <h4 class="header-title">Pie chart</h4>
+        <div style="display: block" *ngIf="week">
+          <canvas mdbChart [chartType]="'pie'" [datasets]="week.datasets" [labels]="week.chartLabels"
+            [colors]="week.chartColors" [options]="week.lineChartOptions" [legend]="false">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <!--/.Card-->
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-4 mb-4">
+    <!--Card-->
+    <div class="card">
+      <!--Card content-->
+      <div class="card-body">
+        <h4 class="header-title">Radar chart</h4>
+        <div style="display: block" *ngIf="week">
+          <canvas mdbChart [chartType]="'radar'" [datasets]="week.datasets" [labels]="week.chartLabels"
+            [colors]="week.chartColors" [options]="week.lineChartOptions" [legend]="false">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <!--/.Card-->
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+    <!--Card Primary-->
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Recent Logs</h4>
+        <table mdbTable borderless="true" hover="true">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Skill Name</th>
+              <th>Log ID</th>
+              <th>Message</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of logs; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ log.user }}</td>
+              <td>{{ log.skill }}</td>
+              <td>{{ log.id }}</td>
+              <td>{{ log.msg }}</td>
+              <td>{{ log.date }}</td>
+            </tr>
+            <tr *ngIf="logs.length == 0">
+              <th scope="row text-center" colspan="6">No Logs.</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/.Card Primary-->
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+    <!--Card Primary-->
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title">Recent Managers</h4>
+        <table mdbTable borderless="true" hover="true">
+          <thead>
+            <tr>
+              <th class="w-10">#</th>
+              <th class="w-15">Manager ID</th>
+              <th class="w-25">Name</th>
+              <th class="w-25">Role</th>
+              <th>Manage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let manager of managers; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ manager.id }}</td>
+              <td>{{ manager.name }}</td>
+              <td>{{ manager.role }}</td>
+              <td>
+                <button class="btn btn-sm btn-dark" (click)="modify(manager.id)">
+                  <mdb-icon fas icon="user-edit" class="mr-2"></mdb-icon>MODIFY
+                </button>
+                <button class="btn btn-sm btn-dark" (click)="delete(manager.id)">
+                  <mdb-icon fas icon="user-minus" class="mr-2"></mdb-icon>DELETE
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="managers.length == 0">
+              <th scope="row text-center" colspan="6">No Managers.</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--/.Card Primary-->
+  </div>
+  <!--Grid column-->
+</div>
+<!--Grid row-->
+
+<div *ngIf="loading" class="loading-container">
+  <div class="loading"></div>
+  <div id="loading-text">loading</div>
+</div>
