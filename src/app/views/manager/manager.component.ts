@@ -4,6 +4,7 @@ import { AlertService } from 'src/service/alert.service';
 import { ManagerConfig } from 'src/util/utils';
 import { HttpParams } from '@angular/common/http';
 import { Manager } from 'src/model/Manager';
+import { ManagerModalService } from 'src/service/manager-modal.service';
 
 @Component({
   selector: 'app-manager',
@@ -21,6 +22,7 @@ export class ManagerComponent implements OnInit {
 
   constructor(
     private alert: AlertService,
+    private manager: ManagerModalService,
     public pagingService: PagingService,
   ) {
     this.list = new Array();
@@ -80,7 +82,7 @@ export class ManagerComponent implements OnInit {
   alertHidden(modal: EventEmitter<any>) {
     if (modal.observers.length == 0) {
       modal.subscribe(()=> {
-        if (this.alert.getRef().status) {
+        if (this.manager.getRef().status) {
           this.load();
         }
       }); 
@@ -88,15 +90,15 @@ export class ManagerComponent implements OnInit {
   }
 
   add() {
-    this.alertHidden(this.alert.add());
+    this.alertHidden(this.manager.add());
   }
 
   modify(id: string) {
-    console.log("MODIFY", `id : ${id}`);
+    this.alertHidden(this.manager.modify(id));
   }
 
   delete(id: string) {
-    this.alertHidden(this.alert.delete(id));
+    this.alertHidden(this.manager.delete(id));
   }
 
   paging(index: number) {

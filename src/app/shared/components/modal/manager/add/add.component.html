@@ -7,21 +7,21 @@
 <div class="modal-body">
   <form [formGroup]="valid">
     <div class="md-form">
-      <mdb-icon fas icon="id-card" class="prefix grey-text"></mdb-icon>
+      <mdb-icon fas icon="id-card" class="prefix"></mdb-icon>
       <input type="text" name="id" id="manager-id" class="form-control" mdbInput mdbValidate formControlName="id">
       <label for="manager-id">Manager ID</label>
       <mdb-error *ngIf="id.invalid && (id.dirty || id.touched)">아이디는 5자 이상 입력해야 합니다.</mdb-error>
     </div>
 
     <div class="md-form">
-      <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+      <mdb-icon fas icon="user" class="prefix"></mdb-icon>
       <input type="text" name="name" id="orangeForm-name" class="form-control" autocomplete="username" mdbInput mdbValidate formControlName="name">
       <label for="orangeForm-name">Your name</label>
       <mdb-error *ngIf="name.invalid && (name.dirty || name.touched)">이름을 입력하세요.</mdb-error>
     </div>
 
     <div class="md-form">
-      <mdb-icon fab icon="qq" class="prefix grey-text"></mdb-icon>
+      <mdb-icon fab icon="qq" class="prefix"></mdb-icon>
       <select class="browser-default custom-select" name="role" formControlName="select">
         <option value="" disabled>Role</option>
         <option value="KING">KING</option>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="md-form">
-      <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+      <mdb-icon fas icon="lock" class="prefix"></mdb-icon>
       <input type="password" name="password" id="password" class="form-control" autocomplete="new-password" mdbInput mdbValidate formControlName="password">
       <label for="password">Your password</label>
       <mdb-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.Not_null">비밀번호를 입력하세요.</mdb-error>
@@ -39,7 +39,7 @@
       <mdb-success *ngIf="password.valid && (password.dirty || password.touched)">패턴 일치.</mdb-success>
     </div>
     <div class="md-form">
-      <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+      <mdb-icon fas icon="lock" class="prefix"></mdb-icon>
       <input type="password" name="confirm" id="confirm" class="form-control" autocomplete="new-password" mdbInput mdbValidate formControlName="confirm">
       <label for="confirm">Confirm password</label>
       <mdb-error *ngIf="confirm.invalid && (confirm.dirty || confirm.touched)">비밀번호가 일치하지 않습니다.</mdb-error>
