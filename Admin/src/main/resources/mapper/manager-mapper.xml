@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.safetyBread.admin.DAO.ManagerDAO">
 	<select id="selectManagers" resultType="com.safetyBread.admin.model.Manager" parameterType="Map">
-		select ID, Name, Role from manager
+		select id, name, role from manager
 		<trim prefix="where" prefixOverrides="AND | OR">
 			<if test="id != null and !id.equals('')">
 				id like CONCAT("%", #{id}, "%")
@@ -31,4 +31,8 @@
 			</if>
 		</trim>
 	</select>
+	
+	<insert id="addManager" parameterType="Map">
+		insert into manager values(#{id}, #{name}, #{role}, #{password});
+	</insert>
 </mapper>

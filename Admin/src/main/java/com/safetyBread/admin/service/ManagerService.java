@@ -35,4 +35,15 @@ public class ManagerService {
 		
 		return dao.getTotalCount(param).get("total");
 	}
+	
+	public void addManager(Object id, Object name, Object role, Object password) {
+		Map<String, Object> param = new HashMap<String, Object>();
+
+		param.put("id", id);
+		param.put("name", name);
+		param.put("role", role);
+		param.put("password", password);
+		
+		dao.addManager(param);
+	}
 }

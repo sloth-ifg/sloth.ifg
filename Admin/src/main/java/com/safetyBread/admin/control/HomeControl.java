@@ -29,7 +29,7 @@ public class HomeControl {
 	private DashboardService service;
 	
 	@GetMapping("/")
-	public String dashboard() {
+	public JSONObject dashboard() {
 		int[] lineData = {500, 400, 600, 510, 56, 550, 400};
 		HashMap<String, Integer> doughnutData = new HashMap<String, Integer>();
 		
@@ -45,11 +45,11 @@ public class HomeControl {
 		result.put("logs", service.getRecentLogs());
 		result.put("managers", service.getRecentLogs());
 		
-		return result.toString();
+		return result;
 	}
 	
 	@PostMapping("/upload")
-	public String upload(HttpServletResponse response, @RequestParam List<MultipartFile> files) {
+	public JSONObject upload(HttpServletResponse response, @RequestParam List<MultipartFile> files) {
 		JSONObject result = new JSONObject();
 		
 		files.forEach(file -> {
@@ -69,7 +69,7 @@ public class HomeControl {
 			}
 		});
 		
-		return result.toString();
+		return result;
 	}
 	
 	@GetMapping(value = "/img/{img}")
