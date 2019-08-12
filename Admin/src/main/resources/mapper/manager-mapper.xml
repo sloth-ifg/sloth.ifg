@@ -7,8 +7,8 @@
 			<if test="id != null and !id.equals('')">
 				id like CONCAT("%", #{id}, "%")
 			</if>
-			<if test="name != null and !name.equals('')"
-				AND name like CONCAT("%", #{name}, "%")
+			<if test="name != null and !name.equals('')">
+				 name like CONCAT("%", #{name}, "%")
 			</if>
 			<if test="role != null and !role.equals('')">
 				AND role like CONCAT("%", #{role}, "%")
