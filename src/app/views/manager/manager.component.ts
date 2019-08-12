@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { PagingService } from 'src/service/paging.service';
 import { AlertService } from 'src/service/alert.service';
 import { ManagerConfig } from 'src/util/utils';
-import { HttpParams, HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Manager } from 'src/model/Manager';
 
 @Component({
@@ -22,7 +22,6 @@ export class ManagerComponent implements OnInit {
   constructor(
     private alert: AlertService,
     public pagingService: PagingService,
-    private httpClient: HttpClient
   ) {
     this.list = new Array();
     this.pageList = new Array();
@@ -78,9 +77,7 @@ export class ManagerComponent implements OnInit {
     )
   }
 
-  add() {
-    const modal = this.alert.add();
-
+  alertHidden(modal: EventEmitter<any>) {
     if (modal.observers.length == 0) {
       modal.subscribe(()=> {
         if (this.alert.getRef().status) {
@@ -90,17 +87,16 @@ export class ManagerComponent implements OnInit {
     }
   }
 
+  add() {
+    this.alertHidden(this.alert.add());
+  }
+
   modify(id: string) {
     console.log("MODIFY", `id : ${id}`);
   }
 
   delete(id: string) {
-    this.httpClient.delete(`${ManagerConfig("manager")}/${id}`).subscribe(
-      success => {
-        const result: any = success;
-        console.log("DELETE", `id : ${result.id}`);
-      }
-    )
+    this.alertHidden(this.alert.delete(id));
   }
 
   paging(index: number) {

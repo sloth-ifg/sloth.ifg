@@ -31,7 +31,7 @@ import { DeleteComponent } from './components/modal/delete/delete.component';
     ModalComponent,
     AddComponent,
   ],
-  entryComponents: [ModalComponent, AddComponent],
+  entryComponents: [ModalComponent, AddComponent, ModifyComponent, DeleteComponent,],
   providers: [
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
