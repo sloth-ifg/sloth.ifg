@@ -5,17 +5,24 @@ import { CommonModule } from '@angular/common';
 import { CascadingCardComponent } from './components/cascading-card/cascading-card.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { AddComponent } from './components/modal/add/add.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModifyComponent } from './components/modal/modify/modify.component';
+import { DeleteComponent } from './components/modal/delete/delete.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MDBBootstrapModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     CascadingCardComponent,
     PanelComponent,
     ModalComponent,
     AddComponent,
+    ModifyComponent,
+    DeleteComponent,
   ],
   exports: [
     MDBBootstrapModule,

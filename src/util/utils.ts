@@ -1,7 +1,9 @@
+import * as CryptoJS from 'crypto-js';
+
 export function UrlConfig(uri: string) {
     switch (uri) {
         case "dashboard":
-            return "http://localhost:8088";
+            return "http://localhost:8088/";
         case "img":
             return "http://localhost:8088/img/";
         default:
@@ -35,4 +37,8 @@ export function ManagerConfig(uri: string) {
 
 export function percent(total: number, present: number): number {
     return present / total * 100;
+}
+
+export function passwordHash(plain: string, key: string) {
+    return CryptoJS.HmacSHA256(plain, key).toString(CryptoJS.enc.Base64);
 }
