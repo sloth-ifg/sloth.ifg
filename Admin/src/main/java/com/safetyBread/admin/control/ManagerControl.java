@@ -57,6 +57,6 @@ public class ManagerControl {
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable String id) {
-		
+		System.out.println(id);
 	}
 }
