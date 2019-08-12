@@ -9,4 +9,5 @@ public interface ManagerDAO {
 	List<Manager> selectManagers(Map<String, Object> param);
 	Map<String, Long> getTotalCount(Map<String, Object> map);
 	void addManager(Map<String, Object> map);
+	void deleteManager(String id);
 }

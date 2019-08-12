@@ -7,7 +7,7 @@
 			<if test="id != null and !id.equals('')">
 				id like CONCAT("%", #{id}, "%")
 			</if>
-			<if test="name != null and !name.equals('')">
+			<if test="name != null and !name.equals('')"
 				AND name like CONCAT("%", #{name}, "%")
 			</if>
 			<if test="role != null and !role.equals('')">
@@ -35,4 +35,12 @@
 	<insert id="addManager" parameterType="Map">
 		insert into manager values(#{id}, #{name}, #{role}, #{password});
 	</insert>
+	
+	<delete id="deleteManager" parameterType="String">
+		delete from manager where id = #{id};
+	</delete>
+	
+	<select id="getManager" parameterType="Map">
+		select count(*) from manager where id = #{id} and password = #{password};
+	</select>
 </mapper>

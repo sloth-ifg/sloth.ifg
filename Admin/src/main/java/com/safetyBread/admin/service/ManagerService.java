@@ -46,4 +46,8 @@ public class ManagerService {
 		
 		dao.addManager(param);
 	}
+	
+	public void deleteManager(String id) {
+		dao.deleteManager(id);
+	}
 }
