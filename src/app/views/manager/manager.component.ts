@@ -79,7 +79,15 @@ export class ManagerComponent implements OnInit {
   }
 
   add() {
-    this.alert.add().subscribe(()=> console.log(this.alert.getRef().sign));
+    const modal = this.alert.add();
+
+    if (modal.observers.length == 0) {
+      modal.subscribe(()=> {
+        if (this.alert.getRef().status) {
+          this.load();
+        }
+      }); 
+    }
   }
 
   modify(id: string) {

@@ -1,68 +1,52 @@
 <div class="modal-header">
   <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide(); status = false;">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form>
+  <form [formGroup]="valid">
     <div class="md-form">
       <mdb-icon fas icon="id-card" class="prefix grey-text"></mdb-icon>
-      <input type="email" id="manager-id" class="form-control" autocomplete="off" mdbInput mdbValidate>
+      <input type="text" name="id" id="manager-id" class="form-control" mdbInput mdbValidate formControlName="id">
       <label for="manager-id">Manager ID</label>
-      <mdb-error>
-        Input invalid
-      </mdb-error>
-      <mdb-success>
-        Input valid
-      </mdb-success>
+      <mdb-error *ngIf="id.invalid && (id.dirty || id.touched)">아이디는 5자 이상 입력해야 합니다.</mdb-error>
     </div>
 
     <div class="md-form">
       <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
-      <input type="text" id="orangeForm-name" class="form-control" mdbInput mdbValidate>
+      <input type="text" name="name" id="orangeForm-name" class="form-control" autocomplete="username" mdbInput mdbValidate formControlName="name">
       <label for="orangeForm-name">Your name</label>
-      <mdb-error>
-        Input invalid
-      </mdb-error>
-      <mdb-success>
-        Input valid
-      </mdb-success>
+      <mdb-error *ngIf="name.invalid && (name.dirty || name.touched)">이름을 입력하세요.</mdb-error>
     </div>
 
     <div class="md-form">
       <mdb-icon fab icon="qq" class="prefix grey-text"></mdb-icon>
-      <select class="browser-default custom-select">
-        <option value="" disabled selected>Role</option>
+      <select class="browser-default custom-select" name="role" formControlName="select">
+        <option value="" disabled>Role</option>
         <option value="KING">KING</option>
         <option value="Jin">Jin</option>
       </select>
+      <mdb-error *ngIf="select.invalid">권한을 선택하세요.</mdb-error>
     </div>
 
     <div class="md-form">
       <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
-      <input type="password" id="password" class="form-control" autocomplete="off" mdbInput mdbValidate>
+      <input type="password" name="password" id="password" class="form-control" autocomplete="new-password" mdbInput mdbValidate formControlName="password">
       <label for="password">Your password</label>
-      <mdb-error>
-        Input invalid
-      </mdb-error>
-      <mdb-success>
-        Input valid
-      </mdb-success>
+      <mdb-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.Not_null">비밀번호를 입력하세요.</mdb-error>
+      <mdb-error *ngIf="password.invalid && (password.dirty || password.touched) && !password.errors.Not_null">패턴 불일치.</mdb-error>
+      <mdb-success *ngIf="password.valid && (password.dirty || password.touched)">패턴 일치.</mdb-success>
     </div>
     <div class="md-form">
       <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
-      <input type="password" id="confirm" class="form-control" autocomplete="off" mdbInput mdbValidate>
+      <input type="password" name="confirm" id="confirm" class="form-control" autocomplete="new-password" mdbInput mdbValidate formControlName="confirm">
       <label for="confirm">Confirm password</label>
-      <mdb-error>
-        Input invalid
-      </mdb-error>
-      <mdb-success>
-        Input valid
-      </mdb-success>
+      <mdb-error *ngIf="confirm.invalid && (confirm.dirty || confirm.touched)">비밀번호가 일치하지 않습니다.</mdb-error>
+      <mdb-success *ngIf="confirm.valid && (confirm.dirty || confirm.touched)">비밀번호가 일치합니다.</mdb-success>
     </div>
   </form>
 </div>
 <div class="modal-footer d-flex justify-content-center">
-  <button class="btn btn-dark waves-light" mdbWavesEffect (click)="signUp()">Sign up</button>
+  <button class="btn btn-dark waves-light" mdbWavesEffect (click)="add()" [disabled]="valid.status == 'INVALID'">ADD</button>
 </div>

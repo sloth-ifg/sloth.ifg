@@ -6,6 +6,7 @@ export class Log {
     public date: string;
 
     constructor() {
+        this.id = "";
         this.skill = "";
         this.user = "";
         this.message = "";
