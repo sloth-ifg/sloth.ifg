@@ -7,6 +7,7 @@ import { BsModalRef } from 'ngx-bootstrap';
   styleUrls: ['./check.component.scss']
 })
 export class CheckComponent implements OnInit {
+  public status = false;
 
   constructor(
     public modalRef: BsModalRef
@@ -14,5 +15,4 @@ export class CheckComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

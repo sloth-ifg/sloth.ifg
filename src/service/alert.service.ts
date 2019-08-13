@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BsModalService } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { OpenComponent } from 'src/app/shared/components/modal/open/open.component';
 import { CheckComponent } from 'src/app/shared/components/modal/check/check.component';
 
@@ -7,9 +7,15 @@ import { CheckComponent } from 'src/app/shared/components/modal/check/check.comp
   providedIn: 'root'
 })
 export class AlertService {
+  private ref: BsModalRef;
+  
   constructor(
     private modalService: BsModalService
   ) { }
+
+  getRef() {
+    return this.ref.content;
+  }
 
   open(title: string, message: string) {
     const initialState = {
@@ -35,6 +41,8 @@ export class AlertService {
       message: message
     };
 
-    this.modalService.show(CheckComponent, { backdrop: false, ignoreBackdropClick: true, initialState });
+    this.ref = this.modalService.show(CheckComponent, { backdrop: false, ignoreBackdropClick: true, initialState });
+
+    return this.modalService.onHidden;
   }
 }

@@ -9,7 +9,7 @@ import { ModifyComponent } from 'src/app/shared/components/modal/manager/modify/
 })
 export class ManagerModalService {
   private ref: BsModalRef;
-  
+
   constructor(
     private modalService: BsModalService
   ) { }
