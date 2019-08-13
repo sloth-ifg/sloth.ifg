@@ -52,8 +52,4 @@
 		</trim>
 		where id = #{id};
 	</update>
-	
-	<select id="getManager" parameterType="Map">
-		select count(*) from manager where id = #{id} and password = #{password};
-	</select>
 </mapper>

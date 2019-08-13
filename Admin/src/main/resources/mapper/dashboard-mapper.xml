@@ -6,6 +6,22 @@
 	</select>
 	
 	<select id="selectManagers" resultType="com.safetyBread.admin.model.Manager">
-		select ID, Name, Role from manager order by id desc limit 0, 5;
+		select id, name, role from manager order by id desc limit 0, 5;
+	</select>
+	
+	<select id="getManager" parameterType="Map" resultType="com.safetyBread.admin.model.Manager">
+		select id, name, role from manager where id = #{id} and password = #{password};
+	</select>
+	
+	<insert id="insertToken" parameterType="Map">
+		insert into user_session values(#{id}, #{token});
+	</insert>
+	
+	<delete id="deleteToken" parameterType="Map">
+		delete from user_session where token = #{token};
+	</delete>
+	
+	<select id="checkSession" parameterType="Map" resultType="Integer">
+		select count(*) from user_session where token = #{token};
 	</select>
 </mapper>

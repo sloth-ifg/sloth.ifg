@@ -12,9 +12,7 @@ import java.nio.file.Paths;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,15 +35,9 @@ public class LogControl {
 	
 	@GetMapping("/{index}")
 	public JSONObject logs(@PathVariable String index, @RequestParam(required = false) String id, @RequestParam(required = false) String user, @RequestParam(required = false) String skill,  @RequestParam(required = false) String message,  @RequestParam(required = false) String date) throws ParseException {
-		JSONArray list = new JSONArray();
-		JSONParser parser = new JSONParser();
 		JSONObject result = new JSONObject();
 		
-		for (Log log : service.getLogs(index, id, skill, user, message, date)) {
-			list.add(parser.parse(log.toString()));
-		}
-		
-		result.put("list", list);
+		result.put("list", service.getLogs(index, id, skill, user, message, date));
 		result.put("total", service.getTotalCount(id, skill, user, message, date));
 		
 		return result;

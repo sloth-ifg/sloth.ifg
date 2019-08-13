@@ -3,8 +3,10 @@ package com.safetyBread.admin.control;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,12 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.safetyBread.admin.service.DashboardService;
+import com.safetyBread.admin.util.Crypto;
+import com.safetyBread.admin.util.TokenMaker;
 
 @SuppressWarnings("unchecked")
 @RestController
@@ -27,6 +32,36 @@ public class HomeControl {
 	private String path = "";
 	@Autowired
 	private DashboardService service;
+	
+	@PostMapping("/login")
+	public JSONObject login(HttpServletResponse response, @RequestBody Map<String, String> manager) throws IOException {
+		JSONObject result = new JSONObject();
+		
+		try {
+			manager.replace("password", Crypto.SHA256(manager.get("password")));
+			
+			String token = TokenMaker.Create(service.getManager(manager));
+			
+			service.insertToken(manager.get("id"), token);
+			
+			result.put("user", service.getManager(manager));
+			result.put("token", token);
+		} catch (NoSuchAlgorithmException e) {
+			response.sendError(500, e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	@PostMapping("/logout")
+	public void logout(HttpServletResponse response, @RequestBody Map<String, String> param) {	
+		service.deleteToken(param);
+	}
+	
+	@PostMapping("/check")
+	public boolean checkToken(HttpServletResponse response, @RequestBody Map<String, String> manager) {	
+		return service.checkSession(manager);
+	}
 	
 	@GetMapping("/")
 	public JSONObject dashboard() {
@@ -43,7 +78,7 @@ public class HomeControl {
 		result.put("week", lineData);
 		result.put("user", doughnutData);
 		result.put("logs", service.getRecentLogs());
-		result.put("managers", service.getRecentLogs());
+		result.put("managers", service.getRecentManagers());
 		
 		return result;
 	}
