@@ -16,10 +16,15 @@ import { ErrorModule } from './views/errors/error.module';
 // main layout
 import { NavigationModule } from './main-layout/navigation/navigation.module';
 import { ModalModule } from 'ngx-bootstrap';
+import { LoginComponent } from './main-layout/login/login.component';
+import { LayoutComponent } from './main-layout/layout/layout.component';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    LayoutComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -40,7 +45,7 @@ import { ModalModule } from 'ngx-bootstrap';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
 })

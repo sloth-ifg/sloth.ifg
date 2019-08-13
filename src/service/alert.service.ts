@@ -27,6 +27,8 @@ export class AlertService {
   }
 
   error(error: any) {
+    console.log(error);
+
     const initialState = {
       title: error.statusText,
       message: error.message

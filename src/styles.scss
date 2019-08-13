@@ -12,8 +12,7 @@ body {
 }
 
 .card.card-cascade h3,
-.card.card-cascade h4,
-{
+.card.card-cascade h4 {
   margin-bottom: 0px;
 }
 
@@ -304,6 +303,11 @@ body {
   width: 100px;
 }
 /** Loading CSS END **/
+
+html, body {
+  height: 100%;
+  max-height: 100%;
+}
 
 input[type=text], input[type=text]:focus {
   color: #fff;

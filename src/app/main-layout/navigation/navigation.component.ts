@@ -42,12 +42,28 @@ export class NavigationComponent implements OnInit {
         console.log(error.status);
         console.log(error.error.message);
       }
-    )
+    );
   }
 
   menuSizing() {
     this.menu=!this.menu;
 
     this.memuChange.emit(this.menu);
+  }
+
+  logout() {
+    this.httpClient.post(`${UrlConfig("logout")}`, {token: sessionStorage.getItem("token")}).subscribe(
+      () => {
+        sessionStorage.clear();
+
+        location.replace("/login");
+      },
+      (error) => {
+        console.log(error.status);
+        console.log(error.error.message);
+      }
+    )
+
+    
   }
 }

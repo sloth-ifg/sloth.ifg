@@ -3,21 +3,21 @@
     <!-- Sidebar -->
     <div class="sidebar-fixed position-fixed" [ngStyle]="{'width': menu ? '100px' : '270px'}">
         <div class="list-group list-group-flush my-3">
-            <a routerLink="dashboard" routerLinkActive="active"
+            <a routerLink="/dashboard" routerLinkActive="active"
                 class="list-group-item list-group-item-action waves-effect">
                 <mdb-icon fas icon="chart-bar" class="mr-3"></mdb-icon>
                 <span *ngIf="!menu">Dashboard</span>
             </a>
-            <a routerLink="logs" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+            <a routerLink="/logs" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                 <mdb-icon fas icon="scroll" class="mr-3"></mdb-icon>
                 <span *ngIf="!menu">Logs</span>
             </a>
-            <a routerLink="manager" routerLinkActive="active"
+            <a routerLink="/manager" routerLinkActive="active"
                 class="list-group-item list-group-item-action waves-effect">
                 <mdb-icon fas icon="user-tie" class="mr-3"></mdb-icon>
                 <span *ngIf="!menu">Manager</span>
             </a>
-            <a routerLink="help" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+            <a routerLink="/help" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                 <mdb-icon fas icon="question-circle" class="mr-3"></mdb-icon>
                 <span *ngIf="!menu">Help</span>
             </a>
@@ -227,7 +227,7 @@
                         </a>
                         <div class="dropdown-divider"></div>
                         <!-- item-->
-                        <a class="dropdown-item">
+                        <a class="dropdown-item" (click)="logout()">
                             <i class="remixicon-logout-box-line"></i>
                             <span>Logout</span>
                         </a>

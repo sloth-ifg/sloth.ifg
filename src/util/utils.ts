@@ -2,6 +2,12 @@ import * as CryptoJS from 'crypto-js';
 
 export function UrlConfig(uri: string) {
     switch (uri) {
+        case "login":
+            return "http://localhost:8088/login/";
+        case "logout":
+            return "http://localhost:8088/logout/";
+        case "check":
+            return "http://localhost:8088/check/";
         case "dashboard":
             return "http://localhost:8088/";
         case "img":

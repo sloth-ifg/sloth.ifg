@@ -1,0 +1,9 @@
+:host /deep/ .page-footer {
+    position: fixed;
+}
+
+.account-pages {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-100%);
+}

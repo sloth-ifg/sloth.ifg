@@ -181,7 +181,7 @@
     <!--Card Primary-->
     <div class="card">
       <div class="card-body">
-        <h4 class="header-title">Recent Managers</h4>
+        <h4 class="header-title">Recently ADDED Managers</h4>
         <table mdbTable borderless="true" hover="true">
           <thead>
             <tr>
@@ -189,7 +189,6 @@
               <th class="w-15">Manager ID</th>
               <th class="w-25">Name</th>
               <th class="w-25">Role</th>
-              <th>Manage</th>
             </tr>
           </thead>
           <tbody>
@@ -198,14 +197,6 @@
               <td>{{ manager.id }}</td>
               <td>{{ manager.name }}</td>
               <td>{{ manager.role }}</td>
-              <td>
-                <button class="btn btn-sm btn-dark" (click)="modify(manager.id)">
-                  <mdb-icon fas icon="user-edit" class="mr-2"></mdb-icon>MODIFY
-                </button>
-                <button class="btn btn-sm btn-dark" (click)="delete(manager.id)">
-                  <mdb-icon fas icon="user-minus" class="mr-2"></mdb-icon>DELETE
-                </button>
-              </td>
             </tr>
             <tr *ngIf="managers.length == 0">
               <th scope="row text-center" colspan="6">No Managers.</th>
