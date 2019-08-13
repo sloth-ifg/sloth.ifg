@@ -8,13 +8,13 @@
 				id like CONCAT("%", #{id}, "%")
 			</if>
 			<if test="name != null and !name.equals('')">
-				 name like CONCAT("%", #{name}, "%")
+				AND name like CONCAT("%", #{name}, "%")
 			</if>
 			<if test="role != null and !role.equals('')">
 				AND role like CONCAT("%", #{role}, "%")
 			</if>
 		</trim>
-		limit #{index}, 15;
+		limit ${index}, 15;
 	</select>
 	
 	<select id="getTotalCount" resultType="Map">
@@ -39,6 +39,19 @@
 	<delete id="deleteManager" parameterType="String">
 		delete from manager where id = #{id};
 	</delete>
+	
+	<update id="modifyManager" parameterType="Map">
+		update manager 
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and !name.equals('')">
+				name = #{name},
+			</if>
+			<if test="role != null and !role.equals('')">
+				role = #{role}
+			</if>
+		</trim>
+		where id = #{id};
+	</update>
 	
 	<select id="getManager" parameterType="Map">
 		select count(*) from manager where id = #{id} and password = #{password};

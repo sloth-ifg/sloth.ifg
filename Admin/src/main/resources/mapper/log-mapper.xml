@@ -42,7 +42,7 @@
 				AND date like CONCAT("%", #{date}, "%")
 			</if>
 		</trim>
-		order by id desc limit #{index}, 15;
+		order by id desc limit ${index}, 15;
 	</select>
 
 	<select id="getTotalCount" resultType="Map"

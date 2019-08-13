@@ -16,7 +16,7 @@ public class LogService {
 	private LogDAO dao;
 
 	public List<Log> getTotalLogs(String id, String skill, String user, String msg, String date) {
-		Map<String, Object> param = new HashMap<String, Object>();
+		Map<String, String> param = new HashMap<String, String>();
 
 		param.put("id", id);
 		param.put("skill", skill);
@@ -27,8 +27,8 @@ public class LogService {
 		return dao.totalLogs(param);
 	}
 
-	public List<Log> getLogs(int index, String id, String skill, String user, String msg, String date) {
-		Map<String, Object> param = new HashMap<String, Object>();
+	public List<Log> getLogs(String index, String id, String skill, String user, String msg, String date) {
+		Map<String, String> param = new HashMap<String, String>();
 
 		param.put("id", id);
 		param.put("skill", skill);
@@ -41,14 +41,13 @@ public class LogService {
 	}
 
 	public long getTotalCount(String id, String skill, String user, String msg, String date) {
-		Map<String, Object> param = new HashMap<String, Object>();
+		Map<String, String> param = new HashMap<String, String>();
 
 		param.put("id", id);
 		param.put("skill", skill);
 		param.put("user", user);
 		param.put("msg", msg);
 		param.put("date", date);
-		param.put("index", 0);
 
 		return dao.getTotalCount(param).get("total");
 	}

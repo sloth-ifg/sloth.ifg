@@ -36,7 +36,7 @@ public class LogControl {
 	private LogService service;
 	
 	@GetMapping("/{index}")
-	public JSONObject logs(@PathVariable int index, @RequestParam(required = false) String id, @RequestParam(required = false) String user, @RequestParam(required = false) String skill,  @RequestParam(required = false) String message,  @RequestParam(required = false) String date) throws ParseException {
+	public JSONObject logs(@PathVariable String index, @RequestParam(required = false) String id, @RequestParam(required = false) String user, @RequestParam(required = false) String skill,  @RequestParam(required = false) String message,  @RequestParam(required = false) String date) throws ParseException {
 		JSONArray list = new JSONArray();
 		JSONParser parser = new JSONParser();
 		JSONObject result = new JSONObject();

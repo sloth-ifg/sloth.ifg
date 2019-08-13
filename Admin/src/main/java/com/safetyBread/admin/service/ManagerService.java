@@ -15,8 +15,8 @@ public class ManagerService {
 	@Autowired
 	private ManagerDAO dao;
 	
-	public List<Manager> getManagerList(int index, String id, String name, String role) {
-		Map<String, Object> param = new HashMap<String, Object>();
+	public List<Manager> getManagerList(String index, String id, String name, String role) {
+		Map<String, String> param = new HashMap<String, String>();
 
 		param.put("index", index);
 		param.put("id", id);
@@ -26,8 +26,8 @@ public class ManagerService {
 		return dao.selectManagers(param);
 	}
 	
-	public long getTotal(int index, String id, String name, String role) {
-		Map<String, Object> param = new HashMap<String, Object>();
+	public long getTotal(String index, String id, String name, String role) {
+		Map<String, String> param = new HashMap<String, String>();
 		
 		param.put("id", id);
 		param.put("name", name);
@@ -36,18 +36,15 @@ public class ManagerService {
 		return dao.getTotalCount(param).get("total");
 	}
 	
-	public void addManager(Object id, Object name, Object role, Object password) {
-		Map<String, Object> param = new HashMap<String, Object>();
-
-		param.put("id", id);
-		param.put("name", name);
-		param.put("role", role);
-		param.put("password", password);
-		
-		dao.addManager(param);
+	public void addManager(Map<String, String> manager) {
+		dao.addManager(manager);
 	}
 	
 	public void deleteManager(String id) {
 		dao.deleteManager(id);
+	}
+	
+	public void modifyManager(Map<String, String> manager) {
+		dao.modifyManager(manager);
 	}
 }

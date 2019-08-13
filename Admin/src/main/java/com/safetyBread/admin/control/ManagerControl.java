@@ -2,6 +2,7 @@ package com.safetyBread.admin.control;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,7 +32,7 @@ public class ManagerControl {
 	private ManagerService service;
 	
 	@GetMapping("/{index}")
-	public JSONObject manager(@PathVariable int index, @RequestParam(required = false) String id, @RequestParam(required = false) String name, @RequestParam(required = false) String role) throws ParseException {
+	public JSONObject manager(@PathVariable String index, @RequestParam(required = false) String id, @RequestParam(required = false) String name, @RequestParam(required = false) String role) throws ParseException {
 		JSONArray list = new JSONArray();
 		JSONParser parser = new JSONParser();
 		JSONObject result = new JSONObject();
@@ -47,9 +48,11 @@ public class ManagerControl {
 	}
 	
 	@PostMapping("/add")
-	public void add(HttpServletResponse response, @RequestBody JSONObject manager) throws ParseException, IOException {
+	public void add(HttpServletResponse response, @RequestBody Map<String, String> manager) throws ParseException, IOException {
 		try {
-			service.addManager(manager.get("id"), manager.get("name"), manager.get("role"), Crypto.SHA256((String) manager.get("password")));
+			manager.replace("password", Crypto.SHA256(manager.get("password")));
+			
+			service.addManager(manager);
 		} catch (NoSuchAlgorithmException e) {
 			response.sendError(500, e.getMessage());
 		}
@@ -58,5 +61,10 @@ public class ManagerControl {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable String id) {
 		service.deleteManager(id);
+	}
+	
+	@PostMapping("/modify")
+	public void modify(HttpServletResponse response, @RequestBody Map<String, String> manager) {
+		service.modifyManager(manager);
 	}
 }
